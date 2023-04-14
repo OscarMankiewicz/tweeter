@@ -54,3 +54,8 @@
     color: #FEE227;
 }
 
+@media only screen and (max-width:768px) {
+    #tweets {
+        margin-top: 0;
+    }
+}
