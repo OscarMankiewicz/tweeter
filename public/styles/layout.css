@@ -24,6 +24,29 @@ body {
 /*
  * Additional CSS can be defined below or in other CSS files, as per instructions
  */
-main {
-    width: 90%;
+
+.smaller {
+    display: flex;
+    flex-direction: row;
 }
+header{
+    width: 25%;
+}
+
+main {
+    width: 75%;
+}
+
+@media only screen and (max-width: 768px) {
+    .smaller {
+      flex-direction: column;
+    }
+  
+    header {
+      width: 100%;
+    }
+  
+    main {
+      width: 100%;
+    }
+  }
