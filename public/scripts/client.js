@@ -3,6 +3,7 @@
  * jQuery is already loaded
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
+
 const renderTweets = function (tweets) {
     // Loop through the tweets and append each one to the tweets container
     const $tweets = $('#tweets');
