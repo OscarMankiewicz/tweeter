@@ -63,10 +63,10 @@
         <!-- Page-specific (main) content here -->
         <main class="container">
             <section class="new-tweet">
-                <div id="error-message" style="display: none;">Your tweet is too long!</div>
+                <div class="errors" id="error-message-1" style="display: none;">Your tweet cannot be empty</div>
+                <div class="errors" id="error-message-2" style="display: none;">Your tweet is too long!</div>
                 <h2>Compose Tweet</h2>
-                <div id="error-message"></div>
-                <form action="/tweets" method="POST" id="submit-tweet">
+                <form action="/tweets" action="#" method="POST" id="submit-tweet">
                   <textarea name="text" id="tweet-text" placeholder="What are you humming about?"></textarea>
                   <div class="new-tweet-footer">
                     <button id="submit" type="submit">Tweet</button>
