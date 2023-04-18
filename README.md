@@ -24,8 +24,8 @@ This repository is the starter code for the project: Students will fork and clon
 
 ### Desktop View
 
-!["Desktop page"]()
+!["Desktop page"](https://github.com/OscarMankiewicz/tweeter/blob/master/public/images/DesktopView.png?raw=true)
 
 ### Mobile View
 
-!["Mobile View"]()
+!["Mobile View"](https://github.com/OscarMankiewicz/tweeter/blob/master/public/images/MobileView.png?raw=true)
