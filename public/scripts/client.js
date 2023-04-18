@@ -4,19 +4,24 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 
+console.log('JavaScript file loaded');
+
 const renderTweets = function (tweets) {
     // Loop through the tweets and append each one to the tweets container
     const $tweets = $('#tweets');
     $tweets.empty();
     for (const tweet of tweets) {
       const $tweet = createTweetElement(tweet);
-      $tweet.find('#postedDate').text(timeago.format(tweet.created_at));
+      const date = new Date(tweet.created_at);
+      console.log('Formatted Date:', date);
+      $tweet.find('#postedDate').text(timeago.format(date));
       $tweets.prepend($tweet);
     }
 }
   
 
 const createTweetElement = function (data) {
+
     // Create tweet elements
     const $tweet = $('<article>').addClass('tweets');
     const $header = $('<div>').addClass('tweet-header');
@@ -41,52 +46,51 @@ const createTweetElement = function (data) {
     return $tweet;
 }
 
-
-
 $(document).ready(function() {
-    const $form = $('#tweet-form');
-
-  $form.submit(function(event) {
-    event.preventDefault();
-
-    const $textarea = $form.find('textarea');
-
-    if ($('#tweet-text').val() === '' || null) {
-        appendError('You cannot post a blank tweet');
-    } else if ($('#tweet-text').val().length > 140) {
-        appendError('Your tweet is too long!');
-    };
-
-    // Submit the form via AJAX
-    $.ajax({
-      url: '/tweets',
-      method: 'POST',
-      data: $form.serialize(),
-      success: function(response) {
-        loadTweets(renderTweets);
-        $textarea.val(''); 
-      },
-      error: function(xhr, status, error) {
-        console.error(status + ': ' + error);
-      }
-    });
-  });
+    $("#submit-tweet").on("submit", function(event) {
+        event.preventDefault();
+        console.log("Form submitted!");
+        const tweetLength = $("#tweet-text").val().length;
+        if (tweetLength === 0) {
+          $(".errors#error-message-1").slideDown();
+          setTimeout(() => {
+            $(".errors#error-message-1").slideUp();
+          }, 3000);
+          return;
+        } else if (tweetLength > 140) {
+            $("#tweet-text").val("");
+            $(".errors#error-message-2").slideDown();
+            setTimeout(() => {
+                $(".errors#error-message-2").slideUp();
+            }, 3000);
+            return;
+        }
+        const serializedData = $(this).serialize();
+        $.post('/tweets', serializedData)
+          .then(function() {
+            // clear the textarea and reset the character counter
+            console.log('RenderTweets Called')
+            $("#tweet-text").val("");
+            $(".counter").text(140);
+            loadTweets();
+          })
+          .catch(function(err) {
+            console.log('Error posting tweet:', err);
+          });
+      });
+  //load tweets on page load
+  loadTweets();
 
   //function to load tweets
   function loadTweets() {
+    console.log('loadTweets called');
     $.ajax({
-      url: 'http://localhost:8080/tweets',
+      url: '/tweets',
       method: 'GET',
       dataType: 'json',
-      success: function(tweets) {
-        console.log(tweets);
-        const $tweets = $('#tweets');
-        $tweets.empty();
-        for (const tweet of tweets) {
-          const $tweet = createTweetElement(tweet);
-          $tweet.find('#postedDate').text(timeago.format(tweet.created_at));
-          $tweets.prepend($tweet);
-        }
+      success: (tweets) => {
+        console.log('tweets are:' ,tweets);
+        renderTweets(tweets)
       },
       error: function(xhr, status, error) {
         console.error(status + ": " + error);
@@ -94,5 +98,13 @@ $(document).ready(function() {
     });
   }
 
-    loadTweets();
+  function appendError(message) {
+    const $errorMessage = $('#error-message');
+    $errorMessage.slideUp('fast', function() {
+        $errorMessage.text(message);
+        $errorMessage.slideDown('fast');
+    });
+  }
+  
 });
+
