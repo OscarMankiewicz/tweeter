@@ -8,7 +8,7 @@ console.log('JavaScript file loaded');
 
 const renderTweets = function (tweets) {
     // Loop through the tweets and append each one to the tweets container
-    const $tweets = $('#tweets');
+    const $tweets = $('#tweets-box');
     $tweets.empty();
     for (const tweet of tweets) {
       const $tweet = createTweetElement(tweet);
@@ -96,15 +96,6 @@ $(document).ready(function() {
         console.error(status + ": " + error);
       }
     });
-  }
-
-  function appendError(message) {
-    const $errorMessage = $('#error-message');
-    $errorMessage.slideUp('fast', function() {
-        $errorMessage.text(message);
-        $errorMessage.slideDown('fast');
-    });
-  }
-  
+  } 
 });
 
