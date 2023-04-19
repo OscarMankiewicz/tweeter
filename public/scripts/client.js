@@ -4,8 +4,6 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 
-console.log('JavaScript file loaded');
-
 const renderTweets = function (tweets) {
     // Loop through the tweets and append each one to the tweets container
     const $tweets = $('#tweets-box');
@@ -13,7 +11,6 @@ const renderTweets = function (tweets) {
     for (const tweet of tweets) {
       const $tweet = createTweetElement(tweet);
       const date = new Date(tweet.created_at);
-      console.log('Formatted Date:', date);
       $tweet.find('#postedDate').text(timeago.format(date));
       $tweets.prepend($tweet);
     }
@@ -49,7 +46,6 @@ const createTweetElement = function (data) {
 $(document).ready(function() {
     $("#submit-tweet").on("submit", function(event) {
         event.preventDefault();
-        console.log("Form submitted!");
         const tweetLength = $("#tweet-text").val().length;
         if (tweetLength === 0) {
           $(".errors#error-message-1").slideDown();
@@ -69,7 +65,6 @@ $(document).ready(function() {
         $.post('/tweets', serializedData)
           .then(function() {
             // clear the textarea and reset the character counter
-            console.log('RenderTweets Called')
             $("#tweet-text").val("");
             $(".counter").text(140);
             loadTweets();
@@ -83,17 +78,15 @@ $(document).ready(function() {
 
   //function to load tweets
   function loadTweets() {
-    console.log('loadTweets called');
     $.ajax({
       url: '/tweets',
       method: 'GET',
       dataType: 'json',
       success: (tweets) => {
-        console.log('tweets are:' ,tweets);
         renderTweets(tweets)
       },
       error: function(xhr, status, error) {
-        console.error(status + ": " + error);
+        console.log(status + ": " + error);
       }
     });
   } 
