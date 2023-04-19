@@ -37,7 +37,11 @@ main {
     width: 75%;
 }
 
-.errors{
+#error-message-1 {
+    color: red;
+}
+
+#error-message-2 {
     color: red;
 }
 
@@ -45,11 +49,11 @@ main {
     .smaller {
       flex-direction: column;
     }
-  
+
     header {
-      width: 100%;
+        width: 100%;
     }
-  
+
     main {
       width: 100%;
     }
