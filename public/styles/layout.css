@@ -25,12 +25,10 @@ body {
  * Additional CSS can be defined below or in other CSS files, as per instructions
  */
 
+ 
 .smaller {
     display: flex;
     flex-direction: row;
-}
-header{
-    width: 25%;
 }
 
 main {
@@ -45,16 +43,13 @@ main {
     color: red;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 767px) {
     .smaller {
+      display: flex;
       flex-direction: column;
-    }
-
-    header {
-        width: 100%;
     }
 
     main {
       width: 100%;
     }
-  }
+}
