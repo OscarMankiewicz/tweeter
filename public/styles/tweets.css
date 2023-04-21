@@ -58,9 +58,3 @@
 .fa-solid:hover {
     color: #FEE227;
 }
-
-@media only screen and (max-width:768px) {
-    #tweets-box {
-        margin-top: 0;
-    }
-}
