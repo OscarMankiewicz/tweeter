@@ -12,6 +12,7 @@
     width: 90%;
     margin: 1em;
     border: 5px solid #545149;
+    word-wrap: break-word;
 }
 
 .tweets:hover {
