@@ -35,9 +35,11 @@ nav {
     padding: 0 1.5em 0 0;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1024px) {
     nav {
         height: 120px;
+        background-color: #ababab;
+        background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
     }
 
     .title {
